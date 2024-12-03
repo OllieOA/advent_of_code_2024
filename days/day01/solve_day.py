@@ -21,7 +21,7 @@ class Day01(Solver):
         self.left_list = left_list
         self.right_list = right_list
 
-    def part1(self, data: List[str]) -> None:
+    def part1(self, data: List[str]) -> int:
         self.build_lists(data)
         left_list = sorted(self.left_list)
         right_list = sorted(self.right_list)
@@ -31,7 +31,7 @@ class Day01(Solver):
             res += abs(l - r)
         return res
 
-    def part2(self, data: List[str]) -> None:
+    def part2(self, data: List[str]) -> int:
         self.build_lists(data)
 
         right_list_stats = Counter(self.right_list)

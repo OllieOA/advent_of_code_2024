@@ -28,14 +28,14 @@ class Day02(Solver):
 
         return True
 
-    def part1(self, data: List[str]) -> None:
+    def part1(self, data: List[str]) -> int:
         all_res = []
         for line in data:
             nums = [int(x) for x in line.split(" ")]
             all_res.append(self._check_safe(nums))
         return all_res.count(True)
 
-    def part2(self, data: List[str]) -> None:
+    def part2(self, data: List[str]) -> int:
         all_res = []
         for line in data:
             nums = [int(x) for x in line.split(" ")]
