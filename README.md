@@ -19,7 +19,7 @@ https://adventofcode.com/2024/
 
 ### Day 3
 
-- [ ] Part 1 Solved
-- [ ] Part 1 Solved on Day
-- [ ] Part 2 Solved
-- [ ] Part 2 Solved on Day
+- [x] Part 1 Solved
+- [x] Part 1 Solved on Day
+- [x] Part 2 Solved
+- [x] Part 2 Solved on Day
