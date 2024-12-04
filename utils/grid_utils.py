@@ -2,6 +2,8 @@
 
 from typing import List, Tuple, Iterable, Dict
 
+import numpy as np
+
 
 class GridVisualiser:
     def __init__(self, grid: Iterable, spec: Dict):
@@ -22,6 +24,7 @@ def get_adjacent_positions(
     arr_shape: Tuple[int],
     include_diagonals: bool = True,
     direction: Tuple = None,
+    step_size: int = 1,
 ) -> List[Tuple]:
     """Get all adjacent positions ()
 
@@ -37,18 +40,18 @@ def get_adjacent_positions(
         positions = [(pos[0] + direction[0], pos[1] + direction[1])]
     else:
         positions = [
-            (pos[0] + 1, pos[1]),
-            (pos[0] - 1, pos[1]),
-            (pos[0], pos[1] + 1),
-            (pos[0], pos[1] - 1),
+            (pos[0] + step_size, pos[1]),
+            (pos[0] - step_size, pos[1]),
+            (pos[0], pos[1] + step_size),
+            (pos[0], pos[1] - step_size),
         ]
 
     if include_diagonals and not direction:
         diag_positions = [
-            (pos[0] - 1, pos[1] - 1),
-            (pos[0] - 1, pos[1] + 1),
-            (pos[0] + 1, pos[1] - 1),
-            (pos[0] + 1, pos[1] + 1),
+            (pos[0] - step_size, pos[1] - step_size),
+            (pos[0] - step_size, pos[1] + step_size),
+            (pos[0] + step_size, pos[1] - step_size),
+            (pos[0] + step_size, pos[1] + step_size),
         ]
         positions.extend(diag_positions)
 
@@ -59,6 +62,7 @@ def get_adjacent_positions(
     for pos in positions:
         x, y = pos
         if x < 0 or x >= arr_shape[0] or y < 0 or y >= arr_shape[1]:
+            # print(f"FILTERING OUT ({x}, {y})")
             continue
         filtered_positions.append(pos)
     return filtered_positions
