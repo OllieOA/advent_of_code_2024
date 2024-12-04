@@ -12,6 +12,10 @@ class Day02(Solver):
         self.day = day
 
     def _check_safe(self, nums: List[int]) -> bool:
+        """This COULD be simplified by checking from either direction
+        instead of determining if it is "increasing" or not, but the logic
+        is still simple"""
+
         if nums[0] == nums[1]:
             return False
         increasing = (nums[1] - nums[0]) > 0
@@ -29,6 +33,9 @@ class Day02(Solver):
         return True
 
     def part1(self, data: List[str]) -> int:
+        """We have the conditions for whether something is safe, so we just
+        need to implement that logically.
+        """
         all_res = []
         for line in data:
             nums = [int(x) for x in line.split(" ")]
@@ -36,6 +43,10 @@ class Day02(Solver):
         return all_res.count(True)
 
     def part2(self, data: List[str]) -> int:
+        """We can fire off a separate logic branch here if the reactor is
+        initially unsafe by generating all other possibilities and checking if
+        any of them are safe.
+        """
         all_res = []
         for line in data:
             nums = [int(x) for x in line.split(" ")]

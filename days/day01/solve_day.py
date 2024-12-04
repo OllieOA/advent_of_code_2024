@@ -22,6 +22,7 @@ class Day01(Solver):
         self.right_list = right_list
 
     def part1(self, data: List[str]) -> int:
+        """Not much to say - simple list-based arithmetic"""
         self.build_lists(data)
         left_list = sorted(self.left_list)
         right_list = sorted(self.right_list)
@@ -32,6 +33,7 @@ class Day01(Solver):
         return res
 
     def part2(self, data: List[str]) -> int:
+        """Same but we instead need an extra stat count"""
         self.build_lists(data)
 
         right_list_stats = Counter(self.right_list)

@@ -13,6 +13,9 @@ class Day03(Solver):
         self.mul_pattern = r"mul\((\d+),(\d+)\)"
 
     def part1(self, data: List[str]) -> int:
+        """Today's strategy is simple - we will use regex to capture the
+        relevant chunks, then form the operations into numeric form.
+        """
         full_str = "".join([line for line in data])
 
         all_matches = re.findall(self.mul_pattern, full_str)
@@ -24,6 +27,12 @@ class Day03(Solver):
         return curr_total
 
     def part2(self, data: List[str]) -> None:
+        """This is a bit of a mix between regex and a state machine. We find
+        the indexes of all "switches", then we start extracting sub strings.
+
+        Then, we can use the same regex pattern from part 1 to check the
+        numeric value.
+        """
         full_str = "".join([line for line in data])
 
         all_dos = [x.start() for x in re.finditer(r"do\(\)", full_str)]
