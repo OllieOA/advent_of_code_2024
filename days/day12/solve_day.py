@@ -63,14 +63,23 @@ class Day12(Solver):
         return tuple([p + d for p, d in zip(node, direction)])
 
     def get_fence_from_candidate(
-        self, perim_node: Tuple[int], grid: np.array, region_plant: str, perims_probed: Set
+        self,
+        perim_node: Tuple[int],
+        grid: np.array,
+        region_plant: str,
+        region: Set[Tuple[int]],
+        perims_probed: Set,
     ) -> List:
         fences = []
         for direction_label, direction_tuple in DIRECTION_LABEL_TO_TUPLE.items():
-            fence_candidate = (perim_node, direction_tuple)
-            if fence_candidate in perims_probed:
+            region_probe = tuple([p + d for p, d in zip(perim_node, direction_tuple)])
+            if region_probe not in region:
+                # This was the cause of most of my grief - I was accepting
+                # regions on the opposite side of the probe based ONLY on the
+                # plant, NOT if they were part of the contiguous region I check
                 continue
-            region_probe = tuple([p + d for p, d in zip(*fence_candidate)])
+            if tuple(sorted([perim_node, region_probe])) in perims_probed:
+                continue
 
             try:
                 if grid[region_probe] != region_plant:
@@ -80,17 +89,21 @@ class Day12(Solver):
 
             # Now we know that the opposite side of the fence to this perim
             # node is a target plant, so we can try to construct a fence
-            new_fence = [fence_candidate]
+            new_fence = [tuple(sorted([perim_node, region_probe]))]
+
             for perp_dir_label in PERPENDICULARS[direction_label]:
                 perp_dir_tuple = DIRECTION_LABEL_TO_TUPLE[perp_dir_label]
-                nodes = [self.get_tuple_in_direction(fence_candidate[0], perp_dir_tuple)]
+                nodes = [self.get_tuple_in_direction(perim_node, perp_dir_tuple)]
                 while len(nodes) > 0:
                     new_check_node = nodes.pop()
                     new_node_probe = self.get_tuple_in_direction(new_check_node, direction_tuple)
-                    if grid[new_node_probe] == region_plant:
-                        new_fence.append((new_check_node, direction_tuple))
+                    new_check_node_on_plant = grid[new_check_node] == region_plant
+                    if grid[new_node_probe] == region_plant and new_check_node_on_plant:
+                        continue  # We are now inside the region
+                    if grid[new_node_probe] == region_plant and new_node_probe in region:
+                        new_fence.append(tuple(sorted([new_check_node, new_node_probe])))
                         nodes.append(self.get_tuple_in_direction(new_check_node, perp_dir_tuple))
-            fences.append(new_fence)
+            fences.append(sorted(new_fence))
             perims_probed.update(new_fence)
 
         return fences
@@ -104,29 +117,27 @@ class Day12(Solver):
         grid = grid_full
         region_prices = 0
         for region, perim in regions:
+            # print("NEW REGION =============")
             all_fences = []
             perims_probed = set([])
             unique_perims = list(set(perim))
             region_plant = grid[list(region)[0]]
             for unique_perim in unique_perims:
                 # We will create fence candidates
-                all_fences.append(
-                    self.get_fence_from_candidate(unique_perim, grid, region_plant, perims_probed)
+                new_fences = self.get_fence_from_candidate(
+                    unique_perim, grid, region_plant, region, perims_probed
                 )
-            reduced_fences = set([])
+                if len(new_fences) > 0:
+                    all_fences.append(new_fences)
             reduced_fences = set([])
             for fence_group in all_fences:
                 for fence in fence_group:
-                    if len(fence) > 0:
-                        reduced_fence = "|".join([str(x[0]) for x in sorted(fence)])
-                        reduced_fences.add(reduced_fence)
+                    reduced_fence = "|".join([str(x) for x in fence])
+
+                    reduced_fences.add(reduced_fence)
             curr_region_price = len(reduced_fences) * len(region)
-            print(
-                f"REGION {region_plant} EQUATION IS {len(region)} * {len(reduced_fences)} = {curr_region_price}"
-            )
             region_prices += curr_region_price
 
-        # 678332 TOO LOW
         return region_prices
 
 
