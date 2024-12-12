@@ -5,6 +5,10 @@ from typing import List, Tuple, Iterable, Dict
 import numpy as np
 
 
+DIRECTION_LABEL_TO_TUPLE = {"L": (0, -1), "U": (-1, 0), "R": (0, 1), "D": (1, 0)}
+DIRECTION_TUPLE_TO_LABEL = {v: k for k, v in DIRECTION_LABEL_TO_TUPLE.items()}
+
+
 class GridVisualiser:
     def __init__(self, grid: Iterable, spec: Dict):
         self.grid = grid
