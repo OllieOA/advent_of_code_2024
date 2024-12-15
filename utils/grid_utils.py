@@ -10,7 +10,7 @@ DIRECTION_TUPLE_TO_LABEL = {v: k for k, v in DIRECTION_LABEL_TO_TUPLE.items()}
 
 
 class GridVisualiser:
-    def __init__(self, grid: Iterable, spec: Dict):
+    def __init__(self, grid: Iterable, spec: Dict = dict()):
         self.grid = grid
         self.spec = spec
 
@@ -18,9 +18,13 @@ class GridVisualiser:
         display_grid = "\n"
         for row in self.grid:
             for col in row:
-                display_grid += self.spec.get(col, self.grid[row, col])
+                display_grid += self.spec.get(col, col)
             display_grid += "\n"
         print(display_grid)
+
+
+def get_tuple_in_direction(node: Tuple[int], direction: Tuple[int]) -> Tuple[int]:
+    return tuple([p + d for p, d in zip(node, direction)])
 
 
 def get_adjacent_positions(
