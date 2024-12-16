@@ -1,7 +1,6 @@
 # Using a numpy grid, here are some useful common functions
 
 from typing import List, Tuple, Iterable, Dict
-
 import numpy as np
 
 
@@ -78,3 +77,7 @@ def get_adjacent_positions(
 
 def get_manhattan_dist(point1: Tuple[int], point2: Tuple[int]) -> int:
     return sum([abs(p1 - p2) for p1, p2 in zip(point1, point2)])
+
+
+def get_euler_dist(point1: Tuple[int], point2: Tuple[int]) -> float:
+    return np.sqrt(sum([(p1 + p2) ** 2 for p1, p2 in zip(point1, point2)]))
