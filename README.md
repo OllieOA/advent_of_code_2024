@@ -116,3 +116,10 @@ https://adventofcode.com/2024/
 - [x] Part 1 Solved on Day
 - [x] Part 2 Solved
 - [x] Part 2 Solved on Day
+
+### Day 17
+
+- [x] Part 1 Solved
+- [x] Part 1 Solved on Day
+- [ ] Part 2 Solved
+- [ ] Part 2 Solved on Day
