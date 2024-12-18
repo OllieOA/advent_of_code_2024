@@ -61,11 +61,7 @@ class Day17(Solver):
     def run_program(self) -> int:
         self.inst_ptr = 0
         output_vals = []
-        num_iters = 0
         while self.inst_ptr < len(self.op_codes):
-            num_iters += 1
-            if num_iters % 1 == 0:
-                print(f"Instruction pointer at {self.inst_ptr}/{len(self.op_codes)}")
             next_opcode = self.op_codes[self.inst_ptr]
             next_operand = self.op_codes[self.inst_ptr + 1]
             match next_opcode:
