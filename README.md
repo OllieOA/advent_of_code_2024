@@ -122,7 +122,7 @@ https://adventofcode.com/2024/
 - [x] Part 1 Solved
 - [x] Part 1 Solved on Day
 - [ ] Part 2 Solved
-- [ ] Part 2 Solved on Day
+- [ ] ~~Part 2 Solved on Day~~
 
 ### Day 18
 
@@ -147,7 +147,35 @@ https://adventofcode.com/2024/
 
 ### Day 21
 
+- [ ] Part 1 Solved
+- [ ] ~~Part 1 Solved on Day~~
+- [ ] Part 2 Solved
+- [ ] ~~Part 2 Solved on Day~~
+
+### Day 22
+
+- [ ] Part 1 Solved
+- [ ] ~~Part 1 Solved on Day~~
+- [ ] Part 2 Solved
+- [ ] ~~Part 2 Solved on Day~~
+
+### Day 23
+
 - [x] Part 1 Solved
 - [x] Part 1 Solved on Day
 - [x] Part 2 Solved
 - [x] Part 2 Solved on Day
+
+### Day 24
+
+- [ ] Part 1 Solved
+- [ ] Part 1 Solved on Day
+- [ ] Part 2 Solved
+- [ ] Part 2 Solved on Day
+
+### Day 25
+
+- [ ] Part 1 Solved
+- [ ] Part 1 Solved on Day
+- [ ] Part 2 Solved
+- [ ] Part 2 Solved on Day
